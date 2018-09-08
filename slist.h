@@ -8,7 +8,10 @@ class SListIterator : public Iterator<T> {
     public: 
         SListIterator() : Iterator<T>() {};
         SListIterator(Node<T> *current) : Iterator<T>(current) {};
-        SListIterator<T> operator++();
+        SListIterator<T> operator++(){
+            this->current = this->current->next;
+            return *this;
+        }
 };
 
 template <typename Tr>
@@ -28,23 +31,77 @@ class SList {
         };
 
         bool find(T search, Node<T> **&pointer) {
-            // TODO
+            auto* pointer=&head;
+            while ((*pointer)->next!= nullptr){
+                if ((*pointer)->data==search){
+                    return true;
+                }
+                else if(cmp(search,(*pointer)->data)){
+                   return false;
+                }
+                pointer=&((*pointer)->next);
+            }
+            return false;
         }
              
         bool insert(T data) {
-            // TODO
+
+            Node<T> **pointer;
+            auto* nodo= new Node<T>(data);
+            if(find(data, head)== true){
+                return false;
+            }
+            auto* pointer=&head;
+            while(cmp(data, (*pointer)->data)){
+                pointer = &((*pointer)->next);
+            }
+
+            if (head== nullptr){
+                *pointer=nodo;
+                nodo->next= nullptr;
+                return true;
+            }
+            else{
+                *pointer=nodo;
+                nodo->next=*pointer;
+                return true;
+
+            }
+
+
+            //            // omp(search, valor que comp)
         }
              
         bool remove(T item) {
-            // TODO
+            Node<T> **pointer;
+            auto* nodo= new Node<T>(data);
+            if(find(data, head)== true){
+                return false;
+            }
+            else{
+
+                auto **pointer=&head;
+                while(cmp(data, (*pointer)->data)){
+                    pointer = &((*pointer)->next);
+                }
+
+                *pointer=nodo;
+                delete temp;
+                return true;
+
+            }
         }  
              
         iterator begin() {
-            // TODO
+            return(Iterator(head));
         }
              
         iterator end() {
-            // TODO
+            auto* temp=head;
+            while(temp!= nullptr){
+                temp=temp->next;
+            }
+            return(Iterator(temp));
         }
              
         ~SList() {
