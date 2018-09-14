@@ -30,7 +30,7 @@ class SList {
             head = nullptr;
         };
 
-        bool find(T search, Node<T> **&pointer) {
+        bool find(T search, Node<T> **&pointer) { // Esto no va a compilar, tienes una doble declaración
             auto* pointer=&head;
             while ((*pointer)->next!= nullptr){
                 if ((*pointer)->data==search){
@@ -44,7 +44,7 @@ class SList {
             return false;
         }
              
-        bool insert(T data) {
+        bool insert(T data) { // Tienes lógica repetida aquí
 
             Node<T> **pointer;
             auto* nodo= new Node<T>(data);
@@ -74,7 +74,7 @@ class SList {
              
         bool remove(T item) {
             Node<T> **pointer;
-            auto* nodo= new Node<T>(data);
+            auto* nodo= new Node<T>(data); // Qué es data? Esto no va a compilar
             if(find(data, head)== true){
                 return false;
             }
@@ -93,13 +93,13 @@ class SList {
         }  
              
         iterator begin() {
-            return(Iterator(head));
+            return(Iterator(head)); // No es el iterador de la lista simple
         }
              
         iterator end() {
             auto* temp=head;
             while(temp!= nullptr){
-                temp=temp->next;
+                temp=temp->next; // Podría ser iterator(nullptr)
             }
             return(Iterator(temp));
         }

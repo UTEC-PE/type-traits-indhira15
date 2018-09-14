@@ -115,11 +115,11 @@ class DList {
         }
              
         iterator begin() {
-            return(Iterator<T>(head));
+            return(Iterator<T>(head)); // Debería ser el iterator de la lista doble Por ejem. iterator(head)
         }
              
         iterator end() {
-            return(Iterator<T>(tail));
+            return(Iterator<T>(tail)); // Debería ser el iterator de la lista doble. Por ejem. iterator(tail)
         }
              
         ~DList() {
